@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import './ProductsPage.css';
 import { motion } from 'framer-motion';
+import { toast } from 'react-toastify';
 import { BACKEND_BASE_URL } from '../config';
 
 const ProductsPage = forwardRef((props, ref) => {
@@ -35,9 +36,9 @@ const ProductsPage = forwardRef((props, ref) => {
           },
         }
       );
-      alert('Product added to wishlist!');
+      toast.success('Product added to wishlist!');
     } catch (error) {
-      alert('Error adding to wishlist!');
+      toast.error('Error adding to wishlist!');
     }
   };
 
@@ -59,9 +60,10 @@ const ProductsPage = forwardRef((props, ref) => {
           },
         }
       );
-      alert('Product added to cart');
+  
+      toast.success('Product added to cart');
     } catch (error) {
-      alert('Error adding to cart');
+      toast.error('Error adding to cart');
     }
   };
 

@@ -6,6 +6,7 @@ import './CartPage.css';
 import PaymentIntegration from './PaymentIntegration';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BACKEND_BASE_URL } from '../config';
+import { toast } from 'react-toastify';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -112,7 +113,7 @@ function CartPage() {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCartItems(prev => [...prev, { product: response.data.product }]);
-      alert('Product added to cart');
+      toast.success('Product added to wishlist!');
     } catch (error) {
       console.error('Error adding to cart:', error);
       alert('Error adding to cart');

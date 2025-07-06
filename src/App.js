@@ -14,6 +14,9 @@ import AdminDashboard from './components/AdminDashboard';
 import Gallery from './components/Gallery.js';
 import { DraggableCardDemo } from './components/DraggableCardDemo.js';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const productsRef = useRef(null);
 
@@ -60,6 +63,7 @@ function App() {
               : <div>Unauthorized</div>
           } />
         </Routes>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       </div>
     </Router>
   );
