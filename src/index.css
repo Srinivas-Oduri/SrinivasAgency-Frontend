@@ -1,0 +1,114 @@
+
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa; /* Light background */
+  color: #333; /* Dark text color */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.tools-menu-link {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.tools-menu-link:hover {
+  background: #e9ecef; /* Lighter background on hover */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
+
+.title-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0; /* No extra gap between letters */
+  padding: 0;
+}
+
+.dock-letter {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 56px; /* Adjust as needed for your design */
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 0.12em;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.crown-img {
+  height: 56px; /* Match .dock-letter font-size */
+  width: auto;
+  margin: 0 12px;
+  vertical-align: middle;
+}
+.dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 32px;
+  color: #fff !important;
+  font-size: 1.08rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  border-radius: 8px;
+  transition: background 0.18s, color 0.18s;
+  background: transparent;
+}
+
+.dropdown-link:hover, .dropdown-link:focus {
+  background: #222;
+  color: #ffd700 !important; /* gold highlight on hover */
+}
+
+.dropdown-icon {
+  font-size: 1.2em;
+  min-width: 22px;
+  text-align: center;
+  color: #ffd700; /* gold icons */
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+}
+
+.circular-text-navbar {
+  height: 60px; /* Match your navbar height */
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circular-text {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+
+
+
+

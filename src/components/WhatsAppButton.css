@@ -1,0 +1,31 @@
+.whatsapp-float {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  z-index: 9999;
+  background: #25d366;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  cursor: pointer;
+  animation: bounce 1.5s infinite alternate;
+  transition: box-shadow 0.2s;
+}
+
+.whatsapp-float:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.whatsapp-icon {
+  color: #fff;
+  font-size: 2.2rem;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0);}
+  100% { transform: translateY(-20px);}
+}

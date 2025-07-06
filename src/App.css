@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+}
+
+.scrolled {
+  position: relative;
+  top: -50px; /* Adjust this value to control the amount of overlap */
+  transition: top 0.5s ease-in-out;
+}

@@ -1,0 +1,101 @@
+/* Main Container */
+.user-orders-container {
+  padding: 30px;
+  background: #fffaf0; /* Light maroon-pink shade */
+  min-height: 100vh;
+  color: #3b1f1f; /* Deep readable maroon */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Heading */
+.page-title {
+  color: #792222; /* Royal Gold */
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 2.2rem;
+}
+
+/* Card Layout */
+.order-card {
+  border: 1px solid #b8860b;
+  border-radius: 15px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  background: #fffaf6; /* Light cream for good contrast */
+  color: #3b1f1f;
+  box-shadow: 0 0 10px rgba(184, 134, 11, 0.1);
+}
+
+/* On Hover */
+.order-card:hover {
+  transform: scale(1.015);
+  box-shadow: 0 0 15px rgba(184, 134, 11, 0.3);
+}
+
+/* Product Images */
+.product-img {
+  margin: 5px;
+  border: 1px solid #b8860b;
+  padding: 2px;
+  background-color: #fff5e6;
+  border-radius: 8px;
+  box-shadow: 0 0 2px rgba(184, 134, 11, 0.3);
+}
+
+/* Gold text emphasis */
+.gold-text {
+  color: #b8860b;
+  font-weight: bold;
+}
+
+/* Status Icon Badge */
+.status-icon {
+  font-size: 1.5rem;
+  background-color: transparent !important;
+  border: none;
+  padding: 0;
+  vertical-align: middle;
+}
+
+/* Progress bar */
+.progress-custom {
+  height: 22px;
+  border-radius: 50px;
+  background-color: #eee0d0;
+  overflow: hidden;
+}
+
+.progress-custom .progress-bar {
+  background-color: #b8860b !important;
+  color: #3b1f1f;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button Styling */
+.btn-outline-light {
+  border-color: #b8860b;
+  color: #b8860b;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+  background-color: #b8860b;
+  color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .product-img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+  }
+}
