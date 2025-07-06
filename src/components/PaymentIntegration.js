@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button, Image } from 'react-bootstrap';
 import axios from 'axios';
 import './PaymentIntegration.css';
 import phonepeqr from '../images/phonepeQR.jpeg';
+import { BACKEND_BASE_URL } from '../config';
 
 function PaymentIntegration({ cartItems, selectedAddress, subtotal, shipping, total }) {
   const [paymentId, setPaymentId] = useState('');
@@ -36,7 +37,7 @@ function PaymentIntegration({ cartItems, selectedAddress, subtotal, shipping, to
       };
 
       const token = localStorage.getItem('token');
-      const response = await axios.post('/api/orders', orderData, {
+      const response = await axios.post(`${BACKEND_BASE_URL}/api/orders`, orderData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

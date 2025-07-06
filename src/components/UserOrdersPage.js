@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Card, Row, Col, Image, Badge, Collapse, Button, ProgressBar } from 'react-bootstrap';
 import axios from 'axios';
 import './UserOrdersPage.css';
+import { BACKEND_BASE_URL } from '../config';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +21,7 @@ function UserOrdersPage() {
     }
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`/api/orders/user/${userId}`);
+        const response = await axios.get(`${BACKEND_BASE_URL}/api/orders/user/${userId}`);
         const ordersData = Array.isArray(response.data) ? response.data : [];
         setOrders(ordersData);
 
@@ -28,7 +29,7 @@ function UserOrdersPage() {
           ...new Set(ordersData.flatMap(order => order.productIds || []))
         ];
         if (allProductIds.length > 0) {
-          const prodRes = await axios.get(`/api/products?ids=${allProductIds.join(',')}`);
+          const prodRes = await axios.get(`${BACKEND_BASE_URL}/api/products?ids=${allProductIds.join(',')}`);
           const map = {};
           prodRes.data.forEach(prod => {
             map[prod.id || prod._id] = prod;
