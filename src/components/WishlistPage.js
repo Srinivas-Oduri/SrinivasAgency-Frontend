@@ -7,13 +7,21 @@ import './WishlistPage.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BACKEND_BASE_URL } from '../config';
 
+import { useNavigate } from 'react-router-dom';
+
 function WishlistPage() {
+  const navigate = useNavigate();
   const [wishlistItems, setWishlistItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const userId = localStorage.getItem('userId'); // Get user ID from localStorage
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
     if (userId) { // Check if userId exists
       const fetchWishlistItems = async () => {
         try {
@@ -31,7 +39,7 @@ function WishlistPage() {
 
       fetchWishlistItems(); // Call the function here
     }
-  }, [userId]);
+  }, [userId, navigate]);
 
   const handleRemoveFromWishlist = async (wishlistId) => {
     try {
@@ -48,8 +56,12 @@ function WishlistPage() {
   };
 
   const handleAddToWishlist = async (productId) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
     try {
-      const token = localStorage.getItem('token');
       const userId = localStorage.getItem('userId');
       await axios.post(`${BACKEND_BASE_URL}/api/wishlists`, { userId, productId }, {
         headers: {
@@ -63,8 +75,12 @@ function WishlistPage() {
     }
   };
   const handleAddToCart = async (productId) => {
-  try {
-      const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
+    try {
       const userId = localStorage.getItem('userId');
       await axios.post(
         `${BACKEND_BASE_URL}/api/carts`,

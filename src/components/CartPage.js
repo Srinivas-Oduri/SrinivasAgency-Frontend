@@ -7,7 +7,10 @@ import PaymentIntegration from './PaymentIntegration';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BACKEND_BASE_URL } from '../config';
 
+import { useNavigate } from 'react-router-dom';
+
 function CartPage() {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [quantities, setQuantities] = useState({});
   const [recommendations, setRecommendations] = useState([]);
@@ -28,6 +31,11 @@ function CartPage() {
   const userId = localStorage.getItem('userId');
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
     const fetchAddresses = async () => {
       if (userId) {
         try {
@@ -42,7 +50,7 @@ function CartPage() {
       }
     };
     fetchAddresses();
-  }, [userId]);
+  }, [userId, navigate]);
 
   useEffect(() => {
     const fetchCartItems = async () => {

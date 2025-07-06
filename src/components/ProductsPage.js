@@ -17,10 +17,14 @@ const ProductsPage = forwardRef((props, ref) => {
 
   const handleAddToWishlist = async (productId, isBulkProduct, event) => {
     event.stopPropagation();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
     const isFlipped = flippedCards[productId] || false;
     const bulkProduct = isFlipped || isBulkProduct;
     try {
-      const token = localStorage.getItem('token');
       const userId = localStorage.getItem('userId');
       await axios.post(
         `${BACKEND_BASE_URL}/api/wishlists`,
@@ -39,8 +43,12 @@ const ProductsPage = forwardRef((props, ref) => {
 
   const handleAddToCart = async (productId, event) => {
     event.stopPropagation(); // Prevent the click event from bubbling up
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
     try {
-      const token = localStorage.getItem('token');
       const userId = localStorage.getItem('userId');
       await axios.post(
         `${BACKEND_BASE_URL}/api/carts`,

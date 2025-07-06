@@ -3,13 +3,21 @@ import { Container, Card, Row, Col, Image, Badge, Collapse, Button, ProgressBar 
 import axios from 'axios';
 import './UserOrdersPage.css';
 
+import { useNavigate } from 'react-router-dom';
+
 function UserOrdersPage() {
+  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [productMap, setProductMap] = useState({});
   const [expandedOrderIds, setExpandedOrderIds] = useState([]);
   const userId = localStorage.getItem('userId');
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`/api/orders/user/${userId}`);
@@ -31,7 +39,8 @@ function UserOrdersPage() {
       }
     };
     fetchOrders();
-  }, [userId]);
+  }, [userId, navigate]);
+
 
   const getAddressSummary = (addressStr) => {
     try {

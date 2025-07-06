@@ -39,12 +39,22 @@ function NavigationBar() {
     navigate('/login');
   };
 
+  const handleProtectedNavigation = (e, path) => {
+    if (!token) {
+      e.preventDefault();
+      navigate('/login');
+    } else {
+      setShowMenu(false);
+      navigate(path);
+    }
+  };
+
   const dropdownItems = [
     { to: "/", icon: faHome, label: "Home" },
     { to: "/products", icon: faBoxOpen, label: "Products" },
-    { to: "/cart", icon: faShoppingCart, label: "Cart" },
-    { to: "/wishlist", icon: faHeart, label: "Wishlist" },
-    { to: "/orders", icon: faClipboardList, label: "Orders" },
+    { to: "/cart", icon: faShoppingCart, label: "Cart", onClick: (e) => handleProtectedNavigation(e, '/cart') },
+    { to: "/wishlist", icon: faHeart, label: "Wishlist", onClick: (e) => handleProtectedNavigation(e, '/wishlist') },
+    { to: "/orders", icon: faClipboardList, label: "Orders", onClick: (e) => handleProtectedNavigation(e, '/orders') },
      { to: "/gallery", icon: faImages, label: "Gallery" },
     { to: "/contact", icon: faEnvelope, label: "Contact" },
     ...(token
@@ -54,6 +64,7 @@ function NavigationBar() {
           { to: "/signup", icon: faUserPlus, label: "Signup" }
         ])
   ];
+
 
   return (
     <>
