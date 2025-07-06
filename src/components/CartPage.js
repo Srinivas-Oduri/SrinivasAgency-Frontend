@@ -129,6 +129,25 @@ function CartPage() {
   const shipping = cartItems.length > 0 ? 5.0 : 0.0;
   const total = subtotal + shipping;
 
+  const [promoCode, setPromoCode] = useState('');
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [discountAmount, setDiscountAmount] = useState(0);
+
+  const validPromoCodes = ['MASTERTHARUN-50', 'GAUTAM-50'];
+
+  const handleApplyPromoCode = () => {
+    if (validPromoCodes.includes(promoCode.trim().toUpperCase())) {
+      const discount = total * 0.5;
+      setDiscountAmount(discount);
+      setDiscountApplied(true);
+      toast.success('Discount applied!');
+    } else {
+      setDiscountAmount(0);
+      setDiscountApplied(false);
+      toast.error('Invalid promo code');
+    }
+  };
+
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
@@ -144,6 +163,7 @@ function CartPage() {
     };
     if (cartItems.length > 0) fetchRecommendations();
   }, [cartItems, quantities]);
+
 
   const itemVariants = {
     hidden: { opacity: 0, x: -50 },
@@ -328,9 +348,48 @@ function CartPage() {
             <h3>Order Summary</h3>
             <p><strong>Subtotal:</strong> ${subtotal.toFixed(2)}</p>
             <p><strong>Shipping:</strong> ${shipping.toFixed(2)}</p>
-            <h4><strong>Total:</strong> ${total.toFixed(2)}</h4>
+            <h4><strong>Total:</strong> ${ (total - discountAmount).toFixed(2) }</h4>
+
+            <div className="promo-code-section" style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Form.Control
+                type="text"
+                placeholder="Enter promo code"
+                value={promoCode}
+                onChange={(e) => setPromoCode(e.target.value)}
+                disabled={discountApplied}
+                style={{ width: '300px', marginRight: '10px' }}
+              />
+              {!discountApplied ? (
+                <Button
+                  variant="primary"
+                  onClick={handleApplyPromoCode}
+                  disabled={discountApplied}
+                  style={{ height: '38px' }}
+                >
+                  Apply
+                </Button>
+              ) : (
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setPromoCode('');
+                    setDiscountAmount(0);
+                    setDiscountApplied(false);
+                  }}
+                  style={{ height: '38px' }}
+                >
+                  Remove
+                </Button>
+              )}
+            </div>
+            {discountApplied && (
+              <p style={{ color: 'green', marginTop: '0.5rem' }}>
+                Discount applied! You saved ${discountAmount.toFixed(2)}.
+              </p>
+            )}
+
             {selectedAddress ? (
-              <PaymentIntegration selectedAddress={selectedAddress} cartItems={cartItems} subtotal={subtotal} shipping={shipping} total={total} />
+              <PaymentIntegration selectedAddress={selectedAddress} cartItems={cartItems} subtotal={subtotal} shipping={shipping} total={total - discountAmount} />
             ) : (
               <p>Please select an address.</p>
             )}

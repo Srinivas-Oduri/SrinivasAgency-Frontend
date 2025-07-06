@@ -187,3 +187,69 @@
   border: none;
   color: white;
 }
+
+/* Promo code styles */
+.promo-code-section {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.promo-code-input {
+  width: 320px;
+  padding: 10px 14px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: none;
+}
+
+.promo-code-input:focus {
+  border-color: #b8860b; /* goldenrod */
+  box-shadow: 0 0 12px rgba(184, 134, 11, 0.8);
+  outline: none;
+  animation: pulseGlow 1.5s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 8px rgba(184, 134, 11, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 16px rgba(184, 134, 11, 1);
+  }
+}
+
+.promo-code-button {
+  height: 40px;
+  padding: 0 18px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.promo-code-button-primary {
+  background-color: #b8860b; /* goldenrod */
+  border: none;
+  color: white;
+}
+
+.promo-code-button-primary:hover {
+  background-color: #d4af37; /* lighter golden */
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.9);
+}
+
+.promo-code-button-secondary {
+  background-color: #555;
+  border: none;
+  color: white;
+}
+
+.promo-code-button-secondary:hover {
+  background-color: #777;
+  box-shadow: 0 0 12px rgba(119, 119, 119, 0.9);
+}
