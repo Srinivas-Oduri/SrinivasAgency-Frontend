@@ -21,10 +21,11 @@ function UserOrdersPage() {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`/api/orders/user/${userId}`);
-        setOrders(response.data);
+        const ordersData = Array.isArray(response.data) ? response.data : [];
+        setOrders(ordersData);
 
         const allProductIds = [
-          ...new Set(response.data.flatMap(order => order.productIds || []))
+          ...new Set(ordersData.flatMap(order => order.productIds || []))
         ];
         if (allProductIds.length > 0) {
           const prodRes = await axios.get(`/api/products?ids=${allProductIds.join(',')}`);
@@ -85,7 +86,7 @@ function UserOrdersPage() {
     <Container className="user-orders-container">
       <h2 className="page-title">My Orders</h2>
       <Row className="g-4">
-        {orders.map((order) => {
+        {Array.isArray(orders) ? orders.map((order) => {
           const orderId = order._id || order.id;
           const isExpanded = expandedOrderIds.includes(orderId);
           return (
@@ -144,7 +145,7 @@ function UserOrdersPage() {
               </Card>
             </Col>
           );
-        })}
+        }) : null}
       </Row>
     </Container>
   );
