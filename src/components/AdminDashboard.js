@@ -3,6 +3,7 @@ import { Container, Row, Col, Button, Form, Table, Card } from 'react-bootstrap'
 import axios from 'axios';
 import './AdminDashboard.css';
 import { motion } from 'framer-motion';
+import { BACKEND_BASE_URL } from '../config';
 
 function AdminDashboard() {
     const [products, setProducts] = useState([]);
@@ -23,12 +24,12 @@ function AdminDashboard() {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get('/api/products', {
+            const response = await axios.get(`${BACKEND_BASE_URL}/api/products`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
-            setProducts(response.data);
+            setProducts(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
             console.error('Error fetching products:', error);
         }
@@ -36,12 +37,12 @@ function AdminDashboard() {
 
     const fetchOrders = async () => {
         try {
-            const response = await axios.get('/api/admin/orders', {
+            const response = await axios.get(`${BACKEND_BASE_URL}/api/admin/orders`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
-            setOrders(response.data);
+            setOrders(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
             console.error('Error fetching orders:', error);
         }
@@ -54,7 +55,7 @@ function AdminDashboard() {
     const handleAddProduct = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/admin/products', newProduct, {
+            await axios.post(`${BACKEND_BASE_URL}/api/admin/products`, newProduct, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -70,7 +71,7 @@ function AdminDashboard() {
 
     const handleDeleteProduct = async (id) => {
         try {
-            await axios.delete(`/api/admin/products/${id}`, {
+            await axios.delete(`${BACKEND_BASE_URL}/api/admin/products/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -85,7 +86,7 @@ function AdminDashboard() {
 
     const handleUpdateOrderStatus = async (orderId, status, deliveryDate) => {
         try {
-            await axios.put(`/api/admin/orders/${orderId}?status=${status}&deliveryDate=${deliveryDate}`, {}, {
+            await axios.put(`${BACKEND_BASE_URL}/api/admin/orders/${orderId}?status=${status}&deliveryDate=${deliveryDate}`, {}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -211,7 +212,7 @@ function AdminDashboard() {
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map(product => (
+                    {(Array.isArray(products) ? products : []).map(product => (
                         <motion.tr key={product.id}
                             variants={rowVariants}
                             initial="hidden"
@@ -244,7 +245,7 @@ function AdminDashboard() {
                     </tr>
                 </thead>
                 <tbody>
-                    {orders.map(order => (
+                    {(Array.isArray(orders) ? orders : []).map(order => (
                         <motion.tr key={order.id}
                             variants={rowVariants}
                             initial="hidden"
